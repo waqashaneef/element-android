@@ -23,6 +23,7 @@ Bugfix 🐛:
  - Can't handle ongoing call events in background (#1992)
  - Crash / Attachment viewer: Cannot draw a recycled Bitmap #2034
  - Login with Matrix-Id | Autodiscovery fails if identity server is invalid and Homeserver ok (#2027)
+ - Incoming call continues to ring if call is answered on another device (#1921)
 
 Translations 🗣:
  -
