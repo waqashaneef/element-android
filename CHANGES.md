@@ -9,7 +9,7 @@ Improvements 🙌:
  - PIN code: request PIN code if phone has been locked
  - Small optimisation of scrolling experience in timeline (#2114)
  - Allow user to reset cross signing if he has no way to recover (#2052)
- - Add Sygnal API implementation to test is Push are correctly received
+ - Add PushGateway API implementation to test is Push are correctly received
 
 Bugfix 🐛:
  - Improve support for image/audio/video/file selection with intent changes (#1376)
