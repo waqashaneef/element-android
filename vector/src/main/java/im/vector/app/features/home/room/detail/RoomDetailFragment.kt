@@ -222,7 +222,8 @@ class RoomDetailFragment @Inject constructor(
         private val notificationUtils: NotificationUtils,
         private val webRtcPeerConnectionManager: WebRtcPeerConnectionManager,
         private val matrixItemColorProvider: MatrixItemColorProvider,
-        private val imageContentRenderer: ImageContentRenderer
+        private val imageContentRenderer: ImageContentRenderer,
+        private val roomDetailPendingActionStore: RoomDetailPendingActionStore
 ) :
         VectorBaseFragment(),
         TimelineEventController.Callback,
@@ -862,6 +863,17 @@ class RoomDetailFragment @Inject constructor(
     override fun onResume() {
         super.onResume()
         notificationDrawerManager.setCurrentRoom(roomDetailArgs.roomId)
+        roomDetailPendingActionStore.data?.let { handlePendingAction(it) }
+        roomDetailPendingActionStore.data = null
+    }
+
+    private fun handlePendingAction(roomDetailPendingAction: RoomDetailPendingAction) {
+        when (roomDetailPendingAction) {
+            is RoomDetailPendingAction.JumpToReadReceipt ->
+                roomDetailViewModel.handle(RoomDetailAction.JumpToReadReceipt(roomDetailPendingAction.userId))
+            is RoomDetailPendingAction.MentionUser       ->
+                insertUserDisplayNameInTextEditor(roomDetailPendingAction.userId)
+        }.exhaustive
     }
 
     override fun onPause() {
